@@ -6,8 +6,8 @@ dist/
 wheels/
 *.egg-info
 
-# Temporary data catalogs
-temp_data_catalog/
+# Any folder starting with temp_
+temp_*/
 
 # Virtual environments
 .venv
