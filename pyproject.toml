@@ -1,0 +1,18 @@
+[project]
+name = "nautilus-trader-demo-strategies"
+version = "0.1.0"
+description = "Demo examples of various strategies and features implemented in Nautilus Trader."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "nautilus_trader"  # Latest stable version but, dev/alpha releases are suported - see nautilus_pypi
+]
+
+[[tool.uv.index]]
+name = "nautilus_pypi"
+url = "https://packages.nautechsystems.io/simple"
+
+[tool.ruff]
+line-length = 30000  # we want to manage line length ourselves
+fix = true
+show-fixes = true
