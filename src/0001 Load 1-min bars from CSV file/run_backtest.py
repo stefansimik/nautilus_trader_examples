@@ -38,7 +38,6 @@ engine: BacktestEngine = utils.run_backtest(
     end=None,
     streaming=True,
     print_backtest_result=True,
-    log_level="DEBUG",
 )
 
 # Cleanup strategy

@@ -6,8 +6,16 @@ dist/
 wheels/
 *.egg-info
 
-# Any folder starting with temp_
+# Logs
+logs/
+*.log
+
+# Temporary folders / files
 temp_*/
+temp_*
+
+# Jupyter
+.virtual_documents/
 
 # Virtual environments
 .venv

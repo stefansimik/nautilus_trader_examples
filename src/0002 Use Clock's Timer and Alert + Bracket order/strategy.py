@@ -23,7 +23,7 @@ class DemoStrategy(Strategy):
 
     def on_start(self):
         # Subscribe to bars
-        self.subscribe_bars(self.config.primary_1min_bar_type)
+        self.subscribe_bars(self.config.primary_bar_type)
 
         # Recurring timer
         self.clock.set_timer(

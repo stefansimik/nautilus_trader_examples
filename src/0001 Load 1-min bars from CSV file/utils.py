@@ -3,6 +3,7 @@ from decimal import Decimal
 
 import pandas as pd
 from nautilus_trader.backtest.engine import BacktestEngine
+from nautilus_trader.backtest.models import FillModel
 from nautilus_trader.config import BacktestEngineConfig, LoggingConfig
 from nautilus_trader.model import TraderId
 from nautilus_trader.model.currencies import USD
@@ -66,12 +67,17 @@ def run_backtest(
     end: datetime | str | int | None,
     streaming: bool = True,
     print_backtest_result: bool = True,
-    log_level="DEBUG",
 ) -> BacktestEngine:
     # Engine config
     engine_config = BacktestEngineConfig(
         trader_id=TraderId("BACKTEST_TRADER-001"),
-        logging=LoggingConfig(log_level=log_level),
+        logging=LoggingConfig(
+            log_level="DEBUG",       # to stdout
+            log_level_file="INFO",   # to file
+            log_directory="logs",
+            bypass_logging=False,    # set True to bypass logging - for example during optimization (to speedup)
+            use_pyo3=False           # enables logs from Rust + set log level by env variable "export RUST_LOG=debug" in command line
+        ),
     )
 
     # Engine
@@ -84,6 +90,12 @@ def run_backtest(
         account_type=AccountType.MARGIN,  # Type of trading account
         starting_balances=[Money(1_000_000, USD)],  # Initial balance
         base_currency=USD,  # Base currency for the venue
+        fill_model=FillModel(
+            prob_fill_on_limit=0.2,
+            prob_fill_on_stop=0.2,
+            prob_slippage=0.8,
+            random_seed=42
+        )
     )
 
     # Add:

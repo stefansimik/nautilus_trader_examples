@@ -1,7 +1,7 @@
-import pandas as pd
 from datetime import datetime, timezone
 from decimal import Decimal
 
+import pandas as pd
 from nautilus_trader.backtest.engine import BacktestEngine
 from nautilus_trader.backtest.models import PerContractFeeModel
 from nautilus_trader.config import BacktestEngineConfig, LoggingConfig, StrategyConfig

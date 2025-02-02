@@ -5,7 +5,7 @@ description = "Demo examples of various strategies and features implemented in N
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "nautilus_trader"  # Latest stable version but, dev/alpha releases are suported - see nautilus_pypi
+    "nautilus_trader==1.210.0"  # Latest stable version but, dev/alpha releases are suported - see nautilus_pypi
 ]
 
 [[tool.uv.index]]

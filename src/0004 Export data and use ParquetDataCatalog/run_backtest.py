@@ -15,10 +15,8 @@ euro_futures_instrument = utils.create_6E_instrument(venue)
 
 # LOAD BARS FROM CSV FILE
 # Prepare type
-euro_futures_bar_type = BarType(
-    instrument_id=euro_futures_instrument.id,
-    bar_spec=BarSpecification(step=1, aggregation=BarAggregation.MINUTE, price_type=PriceType.LAST),
-)
+euro_futures_bar_type = BarType.from_str(f"{euro_futures_instrument.id}-1-MINUTE-LAST-EXTERNAL")
+
 # Load bar from CSV file
 loaded_bars: list[Bar] = utils.load_bars_from_ninjatrader_csv(
     csv_path=r"../!market_data/from_ninjatrader/6E-MAR25__1-Minutes-Bars__Last__from-20241001-to-20241231.csv",
@@ -26,26 +24,40 @@ loaded_bars: list[Bar] = utils.load_bars_from_ninjatrader_csv(
     bar_type=euro_futures_bar_type,
 )
 
-# -------------------------------
-# Export to Parquet data catalog
-# -------------------------------
+# -------------------------------------------
+# Create catalog
+# -------------------------------------------
+
+# Create data catalog
 data_catalog = ParquetDataCatalog("./temp_data_catalog")
-# Write data to catalog
+
+# -------------------------------------------
+# Add data to catalog
+# -------------------------------------------
+
+# Add new instrument to catalog
 data_catalog.write_data([euro_futures_instrument])  # wrap in list - requires iterable object
+
+# Add new bars to catalog
 data_catalog.write_data(loaded_bars)
 
+# -------------------------------------------
+# Read data from catalog
+# -------------------------------------------
 
-# -------------------------------
-# Load data Parquet data catalog
-# -------------------------------
-loaded_bars_from_parquet: list[Bar] = data_catalog.bars(["6E.SIM-1-MINUTE-LAST-EXTERNAL"])
+# Read all instruments
+all_instruments = data_catalog.instruments()
 
+# Returns bars for all available bar_types
+all_bars = data_catalog.bars()
+
+# Returns bars - but filter only specific bar_types
+euro_futures_bars_from_parquet = data_catalog.bars(["6E.SIM-1-MINUTE-LAST-EXTERNAL"])
 
 # Strategy config
 config = DemoStrategyConfig(
     instrument=euro_futures_instrument,
     primary_bar_type=euro_futures_bar_type,
-    trade_size=1,
 )
 
 # Strategy
@@ -56,7 +68,7 @@ engine: BacktestEngine = utils.run_backtest(
     strategy=strategy,
     venue=venue,
     instrument=euro_futures_instrument,
-    bars=loaded_bars_from_parquet,
+    bars=euro_futures_bars_from_parquet,
     start=None,
     end=None,
     streaming=True,

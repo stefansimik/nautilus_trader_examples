@@ -29,7 +29,6 @@ loaded_bars: list[Bar] = utils.load_bars_from_ninjatrader_csv(
 config = DemoStrategyConfig(
     instrument=euro_futures_instrument,
     primary_bar_type=euro_futures_bar_type,
-    trade_size=1,
 )
 
 # Strategy

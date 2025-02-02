@@ -23,7 +23,7 @@ class DemoStrategy(Strategy):
 
     def on_start(self):
         # Subscribe to bars
-        self.subscribe_bars(self.config.primary_1min_bar_type)
+        self.subscribe_bars(self.config.primary_bar_type)
 
         # One time - time alert
         self.clock.set_time_alert(
@@ -72,7 +72,7 @@ class DemoStrategy(Strategy):
         self.log.info(f"Total bars processed: {self.bar_count}")
 
         # See we can access many bars back, because store up to 100k bars in Cache
-        bars = self.cache.bars(self.config.primary_1min_bar_type)
+        bars = self.cache.bars(self.config.primary_bar_type)
         self.log.info(f"Accessing bar at index 75000: {bars[75000]}")
 
     def on_reset(self):

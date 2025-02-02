@@ -38,8 +38,8 @@ def create_6E_instrument(venue: Venue) -> Instrument:
         ts_init=0,  # Initialization time
         margin_init=Decimal("0.0254"),  # Initial margin $3,500
         margin_maint=Decimal("0.0218"),  # Maintenance margin $3,000
-        maker_fee=Decimal("0.0000182"),  # $2.50 per contract maker fee
-        taker_fee=Decimal("0.0000182"),  # $2.50 per contract taker fee
+        maker_fee=Decimal("0"),  # no maker fee
+        taker_fee=Decimal("0"),  # no taker fee
         # Additional contract specifications
         exchange="CME",  # Chicago Mercantile Exchange rules
     )
