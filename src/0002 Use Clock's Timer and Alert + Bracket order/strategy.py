@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime as dt
 
 import pandas as pd
 import pytz
@@ -18,7 +18,8 @@ class DemoStrategyConfig(StrategyConfig, frozen=True):
 class DemoStrategy(Strategy):
     def __init__(self, config: DemoStrategyConfig):
         super().__init__(config)
-        self.bar_count = 0
+        # Count processed bars
+        self.bars_1min_processed = 0
         self.last_price = None
 
     def on_start(self):
@@ -34,17 +35,14 @@ class DemoStrategy(Strategy):
 
         # One time - time alert
         self.clock.set_time_alert(
-            name="open-trade_alert",
-            alert_time=datetime(2024, 11, 4, 11, 0, 0, tzinfo=pytz.utc),
+            name="open-trade-alert",
+            alert_time=dt.datetime(2024, 1, 15, 11, 0, 0, tzinfo=pytz.utc),
             callback=self.on_alert,
         )
 
     def on_bar(self, bar: Bar):
-        self.bar_count += 1
-        self.last_price = bar.close
-
-        if self.bar_count % 100_000 == 0:
-            self.log.info(f"Processed {self.bar_count} bars")
+        self.bars_1min_processed += 1  # Just count 1-min bars
+        self.last_price = bar.close    # Remember last price
 
     def on_timer(self, event: TimeEvent):
         if event.name == "every_minute":
@@ -73,17 +71,16 @@ class DemoStrategy(Strategy):
                 tp_price=self.config.instrument.make_price(profit_price),
                 tp_order_type=OrderType.LIMIT,
                 # Stoploss
-                sl_trigger_price=self.config.instrument.make_price(stop_price),  # There is only a sl_trigger_price because only StopMarket orders are supported as the SL
+                # There is only a sl_trigger_price because only StopMarket orders are supported as the SL
+                sl_trigger_price=self.config.instrument.make_price(stop_price),
                 # Other settings
                 time_in_force=TimeInForce.GTC,
                 tp_post_only=False,
             )
 
             self.submit_order_list(bracket_order)
-            self.log.info(f"Submitted bracket order: entry @ market, TP @ {profit_price}, SL @ {stop_price}")
+            self.log.info(
+                f"Submitted bracket order: entry @ market, TP @ {profit_price}, SL @ {stop_price}")
 
     def on_stop(self):
-        self.log.info(f"Total bars processed: {self.bar_count}")
-
-    def on_reset(self):
-        self.bar_count = 0
+        self.log.info(f"Total 1-min bars processed: {self.bars_1min_processed}")

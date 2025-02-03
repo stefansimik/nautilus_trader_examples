@@ -1,6 +1,4 @@
-# Standard library imports
 
-# Nautilus trader imports
 from nautilus_trader.common.actor import Actor
 from nautilus_trader.core.data import Data
 from nautilus_trader.model.data import BarType, DataType
