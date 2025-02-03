@@ -44,7 +44,7 @@ if __name__ == "__main__":
     eurusd_future_1min_bar_type = BarType.from_str(f"{eurusd_future_instrument.id}-1-MINUTE-LAST-EXTERNAL")
     # Step 2: Load bar data from CSV file
     eurusd_futures_1min_bars_list: list[Bar] = utils_csv.load_bars_from_ninjatrader_csv(
-        csv_path=r"../!market_data/from_ninjatrader/cme/futures/fx/6EH4.GLBX_1min_bars_20240101_20240131.csv",
+        csv_path=r"../!market_data/cme/futures/fx/6EH4.GLBX_1min_bars_20240101_20240131.csv",
         instrument=eurusd_future_instrument,
         bar_type=eurusd_future_1min_bar_type,
     )

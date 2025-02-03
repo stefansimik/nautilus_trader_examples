@@ -1,7 +1,5 @@
 from nautilus_trader.config import StrategyConfig
-from nautilus_trader.model import Quantity
 from nautilus_trader.model.data import Bar, BarType
-from nautilus_trader.model.enums import OrderSide
 from nautilus_trader.model.instruments import Instrument
 from nautilus_trader.trading.strategy import Strategy
 

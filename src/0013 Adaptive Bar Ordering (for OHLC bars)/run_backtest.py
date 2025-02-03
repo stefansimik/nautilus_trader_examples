@@ -8,7 +8,7 @@ from nautilus_trader.core.datetime import dt_to_unix_nanos
 from nautilus_trader.model.currencies import USD
 from nautilus_trader.model.data import Bar, BarSpecification, BarType
 from nautilus_trader.model.enums import (
-    AccountType, BarAggregation, OmsType, OrderSide, PriceType, TimeInForce)
+    AccountType, BarAggregation, OmsType, PriceType)
 from nautilus_trader.model.identifiers import InstrumentId, TraderId, Venue
 from nautilus_trader.model.objects import Money, Quantity
 from nautilus_trader.test_kit.providers import TestInstrumentProvider
