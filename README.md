@@ -43,8 +43,9 @@ Any python package manager (conda, poetry, pyenv, virtualenv) will work with thi
 2. **Download the repository and switch into folder** 
    * `cd nautilus_trader_examples`
 3. **Run commands:**
-   * `uv sync`  
-      * this command reads file `pyproject.toml` containing python + all dependencies and installs them into newly created `.venv` folder
+   * `uv sync --pre-release=allow`  
+      * This command reads file `pyproject.toml` containing python + all dependencies and installs them into newly created `.venv` folder
+      * Flag is `--pre-release=allow` is required to allow installation, because `cython` (dependency of `nautilus_trader`) is still in alpha version
    * `source .venv/bin/activate`
       * this command activates python environment from local `.venv` folder
 
