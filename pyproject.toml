@@ -5,11 +5,11 @@ description = "Demo examples of various strategies and features implemented in N
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "nautilus_trader==1.210.0"  # Latest stable version but, dev/alpha releases are suported - see nautilus_pypi
+    "nautilus_trader==1.210.0"
 ]
 
-# Allow this only if you need to download alpha/dev versions of Nautilus from custom package index
-# See latest content: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
+# Uncomment this only if you need to download alpha/dev versions from from custom package index of Nautilus.
+# See latest releases: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
 # [[tool.uv.index]]
 # name = "nautilus_pypi"
 # url = "https://packages.nautechsystems.io/simple"
