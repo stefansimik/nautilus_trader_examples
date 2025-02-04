@@ -41,15 +41,15 @@ Any python package manager (conda, poetry, pyenv, virtualenv) will work with thi
 
 1. *Install `uv` (one-time setup):**  
    Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to get `uv` on your system.
-2. **Download the repository** 
-3. **Run commands:**
+2. **Download the repository and switch into folder** 
    * `cd nautilus_trader_examples`
+3. **Run commands:**
    * `uv sync`  
       * this command reads file `pyproject.toml` containing python + all dependencies and installs them into newly created `.venv` folder
    * `source .venv/bin/activate`
-      * this activates python environment from local `.venv` folder
+      * this command activates python environment from local `.venv` folder
 
-You can also setup any IDE to refer to the `.venv` folder as Python environment, that you like PyCharm or VSCode.
+You can also set up any IDE to refer to the `.venv` folder as Python environment, that you like PyCharm or VSCode.
 
 ### More resources about `uv` tool
 - **Tutorial:**  
