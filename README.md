@@ -33,7 +33,8 @@ These examples are designed to help beginners in Nautilus Trader quickly get ori
 ## Run / Development Setup
 
 Any python package manager (conda, poetry, pyenv, virtualenv) will work with this project, but I can't recommend `uv` enough for the speed, reliability and comfort. It is really the best swiss-knife tool for:
-- for installing python itself
+
+- installing python itself
 - managing dependencies
 - managing python environments
 
