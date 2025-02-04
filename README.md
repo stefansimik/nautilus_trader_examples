@@ -1,5 +1,3 @@
-# Sonnet
-
 # Nautilus Trader Examples
 
 This is a community-driven collection of simple, easy-to-follow examples, showcasing various **strategies**
