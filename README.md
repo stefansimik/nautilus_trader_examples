@@ -25,6 +25,7 @@ These examples are designed to help beginners in Nautilus Trader quickly get ori
 | 0011 Using Actor + publish_signal()                  |
 | 0012 Finite State Machine                            |
 | 0013 Adaptive Bar Ordering (for OHLC bars)           |
+| 0014 EMA cross strategy (simple)                    |
 
 ---
 
