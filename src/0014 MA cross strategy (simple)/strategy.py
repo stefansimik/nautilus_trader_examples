@@ -4,6 +4,8 @@ from nautilus_trader.common.enums import LogColor
 from nautilus_trader.config import StrategyConfig
 from nautilus_trader.core.correctness import PyCondition
 from nautilus_trader.indicators.average.ema import ExponentialMovingAverage
+from nautilus_trader.indicators.average.ma_factory import MovingAverageFactory
+from nautilus_trader.indicators.average.moving_average import MovingAverageType
 from nautilus_trader.model.data import Bar, BarType
 from nautilus_trader.model.enums import (
     OrderSide, OrderType)
@@ -12,34 +14,35 @@ from nautilus_trader.model.orders import OrderList
 from nautilus_trader.trading.strategy import Strategy
 
 
-class EMACrossStrategyConfig(StrategyConfig, frozen=True):
+class MACrossStrategyConfig(StrategyConfig, frozen=True):
     instrument: Instrument
     primary_bar_type: BarType
     trade_size: Decimal
-    ema_fast_period: int
-    ema_slow_period: int
+    ma_type: MovingAverageType.SIMPLE
+    ma_fast_period: int
+    ma_slow_period: int
     profit_in_ticks: int
     stoploss_in_ticks: int
 
 
-class EMACrossStrategy(Strategy):
-    def __init__(self, config: EMACrossStrategyConfig):
+class MACrossStrategy(Strategy):
+    def __init__(self, config: MACrossStrategyConfig):
         super().__init__(config)
 
         # Basic checks if configuration makes sense for the strategy
         PyCondition.is_true(
-            config.ema_fast_period < config.ema_slow_period,
-            "Invalid configuration: Fast EMA period {config.ema_fast_period=} must be less than slow EMA period {config.ema_slow_period=}",
+            config.ma_fast_period < config.ma_slow_period,
+            "Invalid configuration: Fast MA period {config.ma_fast_period=} must be smaller than slow MA period {config.ma_slow_period=}",
         )
 
         # Create indicators
-        self.ema_fast = ExponentialMovingAverage(period=config.ema_fast_period)
-        self.ema_slow = ExponentialMovingAverage(period=config.ema_slow_period)
+        self.ma_fast = MovingAverageFactory.create(period=config.ma_fast_period, ma_type=config.ma_type)
+        self.ma_slow = MovingAverageFactory.create(period=config.ma_slow_period, ma_type=config.ma_type)
 
     def on_start(self):
         # Connect indicators with bar-type for automatic updating
-        self.register_indicator_for_bars(self.config.primary_bar_type, self.ema_fast)
-        self.register_indicator_for_bars(self.config.primary_bar_type, self.ema_slow)
+        self.register_indicator_for_bars(self.config.primary_bar_type, self.ma_fast)
+        self.register_indicator_for_bars(self.config.primary_bar_type, self.ma_slow)
 
         # Subscribe to bars
         self.subscribe_bars(self.config.primary_bar_type)
@@ -56,7 +59,7 @@ class EMACrossStrategy(Strategy):
         # Note: If we got here, all registered indicator are initialized
 
         # BUY LOGIC
-        if self.ema_fast.value > self.ema_slow.value:               # If fast EMA is above slow EMA
+        if self.ma_fast.value > self.ma_slow.value:               # If fast EMA is above slow EMA
             if self.portfolio.is_flat(self.config.instrument.id):   # If we are flat
                 self.cancel_all_orders(self.config.instrument.id)   # Make sure all waiting orders are cancelled
                 self.fire_trade(OrderSide.BUY, bar)  # Fire buy order
@@ -66,7 +69,7 @@ class EMACrossStrategy(Strategy):
                 self.fire_trade(OrderSide.BUY, bar)      # Fire buy order
 
         # SELL LOGIC
-        if self.ema_fast.value < self.ema_slow.value:
+        if self.ma_fast.value < self.ma_slow.value:
             if self.portfolio.is_flat(self.config.instrument.id):
                 self.cancel_all_orders(self.config.instrument.id)
                 self.fire_trade(OrderSide.SELL, bar)
@@ -98,6 +101,9 @@ class EMACrossStrategy(Strategy):
             tp_order_type=OrderType.LIMIT,  # profit is LIMIT order
             tp_price=self.config.instrument.make_price(profit_price),  # set price for profit LIMIT order
         )
+
+        from nautilus_trader.model.functions import order_side_to_str
+        self.log.info(f"Order: {order_side_to_str(order_side)} | Last price: {last_price} | Profit: {profit_price} | Stoploss: {stoploss_price}", color=LogColor.BLUE)
 
         # Submit order
         self.submit_order_list(bracket_order_list)

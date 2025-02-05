@@ -1,7 +1,8 @@
 import pandas as pd
 from nautilus_trader.backtest.engine import BacktestEngine, Decimal
-from nautilus_trader.backtest.models import PerContractFeeModel
+from nautilus_trader.backtest.models import (FillModel, PerContractFeeModel)
 from nautilus_trader.config import BacktestEngineConfig, LoggingConfig
+from nautilus_trader.indicators.average.moving_average import MovingAverageType
 from nautilus_trader.model import TraderId
 from nautilus_trader.model.currencies import USD
 from nautilus_trader.model.data import Bar, BarType
@@ -11,14 +12,14 @@ from nautilus_trader.model.objects import Money
 
 import utils_csv
 import utils_instruments
-from strategy import EMACrossStrategy, EMACrossStrategyConfig
+from strategy import MACrossStrategy, MACrossStrategyConfig
 
 
 if __name__ == "__main__":
     # Engine: configure + create
     engine_config = BacktestEngineConfig(
         trader_id=TraderId("BACKTEST_TRADER-001"),
-        logging=LoggingConfig(log_level="INFO", log_level_file='DEBUG'),
+        logging=LoggingConfig(log_level="INFO", log_level_file='DEBUG', log_directory='logs'),
     )
     engine = BacktestEngine(config=engine_config)
 
@@ -30,9 +31,15 @@ if __name__ == "__main__":
         oms_type=OmsType.NETTING,  # Order Management System type
         account_type=AccountType.MARGIN,  # Type of trading account
         starting_balances=[Money(1_000_000, USD)],  # Initial balance
-        fee_model=PerContractFeeModel(commission=Money(2.50, USD)),
+        fee_model=PerContractFeeModel(commission=Money(2.36, USD)),
         base_currency=USD,  # Base currency for the venue
-        default_leverage=Decimal(1)
+        default_leverage=Decimal(1),
+        fill_model=FillModel(
+            prob_fill_on_limit=0,  # 0 = 0% probability = never fill market touches limit price
+            prob_fill_on_stop=0,   # 0 = 0% probability =  never fill at stop-price when market touches stop-price
+            prob_slippage=1,       # 1 = 100% probability =  always simulate 1-tick slippage with market order
+            random_seed=42,        # fixed random seed for reproducible results
+        )
     )
 
     # Instrument: create + add to engine
@@ -52,22 +59,23 @@ if __name__ == "__main__":
     engine.add_data(eurusd_futures_1min_bars_list)
 
     # Strategy: Configure -> create -> add to engine
-    strategy_config = EMACrossStrategyConfig(
+    strategy_config = MACrossStrategyConfig(
         instrument=eurusd_future_instrument,
         primary_bar_type=eurusd_future_1min_bar_type,
         trade_size=Decimal(1),
-        ema_fast_period=20,
-        ema_slow_period=50,
+        ma_type=MovingAverageType.SIMPLE,
+        ma_fast_period=20,
+        ma_slow_period=50,
         profit_in_ticks=20,
         stoploss_in_ticks=20,
     )
-    strategy = EMACrossStrategy(strategy_config)
+    strategy = MACrossStrategy(strategy_config)
     engine.add_strategy(strategy)
 
     # Run engine = Run backtest
     engine.run(
         start=None, #'2024-01-25',  # if start is not specified = any first data, that will come will be processed
-        end=None,
+        end='2024-01-03',
         streaming=False
     )
 
