@@ -8,7 +8,7 @@ dependencies = [
     "nautilus_trader==1.210.0"
 ]
 
-# Uncomment this only if you need to download alpha/dev versions from from custom package index of Nautilus.
+# Uncomment this only if you need to download alpha/dev versions from custom package index of Nautilus.
 # See latest releases: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
 # [[tool.uv.index]]
 # name = "nautilus_pypi"

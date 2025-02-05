@@ -28,6 +28,22 @@ These examples are designed to help beginners in Nautilus Trader quickly get ori
 
 ---
 
+## Import Reference
+
+To help developers navigate the extensive Nautilus Trader framework, we maintain a comprehensive import reference guide at `imports.py`. This guide:
+
+- Lists all available imports, organized alphabetically by module path
+- Helps prevent common import-related issues (e.g., when importing native Python vs PyO3 bindings)
+- Makes it easier to find and use the framework's components
+
+For example, when implementing technical indicators, beginners might wonder which import should they use use:
+```python
+from nautilus_trader.indicators.average.ema import ExponentialMovingAverage  # ✓ Preferred
+# or
+from nautilus_trader.core.nautilus_pyo3 import ExponentialMovingAverage      # ✗ Not recommended
+```
+The import reference will guide you to the correct choice.
+
 ## Run / Development Setup
 
 Any python package manager (conda, poetry, pyenv, virtualenv) will work with this project, but I can't recommend `uv` enough for the speed, reliability and comfort. It is really the best swiss-knife tool for:
