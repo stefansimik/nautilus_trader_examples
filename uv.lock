@@ -1,9 +1,6 @@
 version = 1
 requires-python = ">=3.12"
 
-[options]
-prerelease-mode = "allow"
-
 [[package]]
 name = "click"
 version = "8.1.8"
@@ -88,7 +85,7 @@ wheels = [
 [[package]]
 name = "nautilus-trader"
 version = "1.210.0"
-source = { registry = "https://packages.nautechsystems.io/simple" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "cython" },
@@ -102,9 +99,12 @@ dependencies = [
     { name = "tqdm" },
     { name = "uvloop", marker = "sys_platform != 'win32'" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/9e/98/4ed65cb4f6333fd90510d9868cdac77cc2160af69e70e6b8bdebc91d3970/nautilus_trader-1.210.0.tar.gz", hash = "sha256:a2201138a689d02b16d20c7f64874daa51219bd0b43583ca42c87e7d68e856d4", size = 1683402 }
 wheels = [
-    { url = "https://packages.nautechsystems.io/simple/nautilus-trader/nautilus_trader-1.210.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:b438f7451ca74883476b8789ba50a1ec3f07b03699b1c99ac931a06566d8d7b4" },
-    { url = "https://packages.nautechsystems.io/simple/nautilus-trader/nautilus_trader-1.210.0-cp312-cp312-manylinux_2_35_x86_64.whl", hash = "sha256:a5f227c0069013c52cdfcc8ade0b7c643ec02a8c78ec44cd21f5b319100f8d2c" },
+    { url = "https://files.pythonhosted.org/packages/23/6b/1e0ee0b68c865fa677daac979f9329b4302bfb26f2828f07363d8af7b93a/nautilus_trader-1.210.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:b438f7451ca74883476b8789ba50a1ec3f07b03699b1c99ac931a06566d8d7b4", size = 59671137 },
+    { url = "https://files.pythonhosted.org/packages/4e/01/0b3e37fd4c5a59e4459d37f37d471ca0ec78bb75b501a3c15f15a6677b70/nautilus_trader-1.210.0-cp312-cp312-manylinux_2_35_x86_64.whl", hash = "sha256:d5d5812fd05651fab6af45bf9e6b7d8fa2c91767ec88017c15638743ae6443d1", size = 65782131 },
+    { url = "https://files.pythonhosted.org/packages/28/33/ae376c65d396316ccdd8dd8246ff52cb26bb43e2c2d0716cb207f9a7cc40/nautilus_trader-1.210.0-cp312-cp312-manylinux_2_39_x86_64.whl", hash = "sha256:103c5a850ecc79e04aae265488051e281979b1e490498e90a7ce422db6b54b8d", size = 65633629 },
+    { url = "https://files.pythonhosted.org/packages/0b/86/82434ad0533d9028def186f72123f664b4e13432af6716b33fc8b82b1276/nautilus_trader-1.210.0-cp312-cp312-win_amd64.whl", hash = "sha256:265b56c29f92851cab0911aa4f4e8b3bd19a049daef4dd97983b2d856601cbbc", size = 33758329 },
 ]
 
 [[package]]

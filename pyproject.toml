@@ -5,7 +5,7 @@ description = "Demo examples of various strategies and features implemented in N
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "nautilus_trader==1.210.0"
+    "nautilus_trader==1.210.0",
 ]
 
 # Uncomment this only if you need to download alpha/dev versions from custom package index of Nautilus.
