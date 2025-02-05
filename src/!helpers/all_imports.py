@@ -104,6 +104,7 @@ from nautilus_trader.model.orders import (
     LimitIfTouchedOrder, LimitOrder, MarketIfTouchedOrder, MarketOrder, MarketToLimitOrder, Order, StopLimitOrder,
     StopMarketOrder, TrailingStopLimitOrder, TrailingStopMarketOrder
 )
+from nautilus_trader.model.orders.list import OrderList
 from nautilus_trader.model.position import Position
 from nautilus_trader.persistence.catalog.parquet import ParquetDataCatalog
 from nautilus_trader.persistence.wranglers import (

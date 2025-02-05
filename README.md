@@ -30,17 +30,21 @@ These examples are designed to help beginners in Nautilus Trader quickly get ori
 
 ## Import Reference
 
-To help developers navigate the extensive Nautilus Trader framework, we maintain a comprehensive import reference guide at `imports.py`. This guide:
+To help developers navigate the extensive Nautilus Trader framework, we maintain a comprehensive import reference
+guide at file `src/!helpers/all_imports.py`. 
+
+This guide:
 
 - Lists all available imports, organized alphabetically by module path
 - Helps prevent common import-related issues (e.g., when importing native Python vs PyO3 bindings)
 - Makes it easier to find and use the framework's components
 
-For example, when implementing technical indicators, beginners might wonder which import should they use use:
+For example, when implementing technical indicators, beginners might wonder which import should they use (these could be offered by IDEs):
 ```python
-from nautilus_trader.indicators.average.ema import ExponentialMovingAverage  # ✓ Preferred
-# or
-from nautilus_trader.core.nautilus_pyo3 import ExponentialMovingAverage      # ✗ Not recommended
+from nautilus_trader.common.enums import LogColor               # ✓ This is the right one
+from nautilus_trader.core.nautilus_pyo3 import LogColor         # ✗ Not recommended
+from nautilus_trader.core.nautilus_pyo3.common import LogColor  # ✗ Not recommended
+from nautilus_trader.core.rust.common import LogColor           # ✗ Not recommended
 ```
 The import reference will guide you to the correct choice.
 
