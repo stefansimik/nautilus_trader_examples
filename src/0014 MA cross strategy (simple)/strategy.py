@@ -3,12 +3,11 @@ from decimal import Decimal
 from nautilus_trader.common.enums import LogColor
 from nautilus_trader.config import StrategyConfig
 from nautilus_trader.core.correctness import PyCondition
-from nautilus_trader.indicators.average.ema import ExponentialMovingAverage
 from nautilus_trader.indicators.average.ma_factory import MovingAverageFactory
 from nautilus_trader.indicators.average.moving_average import MovingAverageType
 from nautilus_trader.model.data import Bar, BarType
-from nautilus_trader.model.enums import (
-    OrderSide, OrderType)
+from nautilus_trader.model.enums import OrderSide, OrderType
+from nautilus_trader.model.functions import order_side_to_str
 from nautilus_trader.model.instruments import Instrument
 from nautilus_trader.model.orders import OrderList
 from nautilus_trader.trading.strategy import Strategy
@@ -59,14 +58,14 @@ class MACrossStrategy(Strategy):
         # Note: If we got here, all registered indicator are initialized
 
         # BUY LOGIC
-        if self.ma_fast.value > self.ma_slow.value:               # If fast EMA is above slow EMA
-            if self.portfolio.is_flat(self.config.instrument.id):   # If we are flat
-                self.cancel_all_orders(self.config.instrument.id)   # Make sure all waiting orders are cancelled
-                self.fire_trade(OrderSide.BUY, bar)  # Fire buy order
+        if self.ma_fast.value > self.ma_slow.value:                     # If fast EMA is above slow EMA
+            if self.portfolio.is_flat(self.config.instrument.id):       # If we are flat
+                self.cancel_all_orders(self.config.instrument.id)       # Make sure all waiting orders are cancelled
+                self.fire_trade(OrderSide.BUY, bar)                     # Fire buy order
             if self.portfolio.is_net_short(self.config.instrument.id):  # We are short already
                 self.cancel_all_orders(self.config.instrument.id)       # Make sure all waiting orders are cancelled
                 self.close_all_positions(self.config.instrument.id)     # Let's close current position
-                self.fire_trade(OrderSide.BUY, bar)      # Fire buy order
+                self.fire_trade(OrderSide.BUY, bar)                     # Fire buy order
 
         # SELL LOGIC
         if self.ma_fast.value < self.ma_slow.value:
@@ -91,7 +90,7 @@ class MACrossStrategy(Strategy):
         else:
             raise ValueError(f'Order side: {order_side} is not supported.')
 
-        # Prepare bracket order (bracker order is entry order with related profit / stoploss orders)
+        # Prepare bracket order (bracket order is entry order with related contingent profit / stoploss orders)
         bracket_order_list: OrderList = self.order_factory.bracket(
             instrument_id=self.config.instrument.id,
             order_side=order_side,
@@ -102,7 +101,7 @@ class MACrossStrategy(Strategy):
             tp_price=self.config.instrument.make_price(profit_price),  # set price for profit LIMIT order
         )
 
-        from nautilus_trader.model.functions import order_side_to_str
+        # Log order
         self.log.info(f"Order: {order_side_to_str(order_side)} | Last price: {last_price} | Profit: {profit_price} | Stoploss: {stoploss_price}", color=LogColor.BLUE)
 
         # Submit order
