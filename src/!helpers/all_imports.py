@@ -4,17 +4,19 @@
 # designed to help developers navigate the correct module paths. All imports are
 # organized alphabetically by module path for easy reference. Due to the framework's
 # extensive codebase, some classes share names across different modules (e.g., native
-# Python implementations versus PyO3 bindings).
+# Python implementations versus PyO3 bindings versus Rust classes).
 #
-# Import Resolution Example:
-# The ExponentialMovingAverage class exists in multiple locations:
-# ✓ from nautilus_trader.indicators.average.ema import ExponentialMovingAverage  # Preferred implementation
-# ✗ from nautilus_trader.core.nautilus_pyo3 import ExponentialMovingAverage     # Not recommended
+# Example: The LogColor class exists in multiple locations:
+#
+# from nautilus_trader.common.enums import LogColor               # ✓ This is the right one we need to use
+# from nautilus_trader.core.nautilus_pyo3 import LogColor         # ✗ Not recommended
+# from nautilus_trader.core.nautilus_pyo3.common import LogColor  # ✗ Not recommended
+# from nautilus_trader.core.rust.common import LogColor           # ✗ Not recommended
 
 from nautilus_trader.analysis.statistic import PortfolioStatistic
 from nautilus_trader.analysis.statistics.loser_avg import AvgLoser
-from nautilus_trader.analysis.statistics.winner_avg import AvgWinner
 from nautilus_trader.analysis.statistics.win_rate import WinRate
+from nautilus_trader.analysis.statistics.winner_avg import AvgWinner
 from nautilus_trader.backtest.engine import BacktestEngine, BacktestEngineConfig
 from nautilus_trader.backtest.models import (FeeModel, FillModel, FixedFeeModel, MakerTakerFeeModel, PerContractFeeModel)
 from nautilus_trader.cache.cache import Cache
@@ -52,7 +54,8 @@ from nautilus_trader.indicators.atr import AverageTrueRange
 from nautilus_trader.indicators.average.ama import AdaptiveMovingAverage
 from nautilus_trader.indicators.average.ema import ExponentialMovingAverage
 from nautilus_trader.indicators.average.hma import HullMovingAverage
-from nautilus_trader.indicators.average.ma_factory import MovingAverageFactory, MovingAverageType
+from nautilus_trader.indicators.average.ma_factory import MovingAverageFactory
+from nautilus_trader.indicators.average.moving_average import MovingAverageType, MovingAverage
 from nautilus_trader.indicators.average.rma import WilderMovingAverage
 from nautilus_trader.indicators.average.sma import SimpleMovingAverage
 from nautilus_trader.indicators.average.vidya import VariableIndexDynamicAverage
@@ -81,8 +84,21 @@ from nautilus_trader.indicators.swings import Swings
 from nautilus_trader.indicators.vhf import VerticalHorizontalFilter
 from nautilus_trader.indicators.volatility_ratio import VolatilityRatio
 from nautilus_trader.indicators.vwap import VolumeWeightedAveragePrice
-from nautilus_trader.model.currencies import (USD, USDT)
-from nautilus_trader.model.data import Bar, BarSpecification, BarType, DataType
+from nautilus_trader.model.book import BookLevel, OrderBook
+from nautilus_trader.model.currencies import (
+    # Fiat Currencies:
+    AUD, BRL, CAD, CHF, CNY, CNH, CZK, DKK, EUR, GBP, HKD, HUF, ILS, INR, JPY, KRW, MXN, NOK, NZD,
+    PLN, RUB, SAR, SEK, SGD, THB, TRY, USD, XAG, XAU, ZAR,
+    # Crypto Currencies:
+    ONEINCH, AAVE, ACA, ADA, AVAX, BCH, BTTC, BNB, BRZ, BSV, BTC, BUSD, XBT, DASH, DOGE, DOT, EOS, ETH,
+    ETHW, EZ, FTT, JOE, LINK, LTC, LUNA, NBT, SOL, TRX, TRYB, TUSD, VTC, XLM, XMR, XRP, XTZ, USDC,
+    USDC_POS, USDP, USDT, WSB, XEC, ZEC,
+)
+from nautilus_trader.model.data import (
+    Bar, BarSpecification, BarType, DataType, CustomData,
+    BookOrder, OrderBookDelta, OrderBookDeltas, OrderBookDepth10, InstrumentStatus, InstrumentClose,
+    QuoteTick, TradeTick
+)
 from nautilus_trader.model.enums import (
     AccountType, AggregationSource, AggressorSide, AssetClass, BarAggregation, BookAction, BookType, ContingencyType,
     CurrencyType, InstrumentClass, InstrumentCloseType, LiquiditySide, MarketStatus, MarketStatusAction, OmsType,
@@ -93,6 +109,14 @@ from nautilus_trader.model.events import (
     AccountState, OrderAccepted, OrderCancelRejected, OrderCanceled, OrderDenied, OrderEmulated, OrderExpired,
     OrderFilled, OrderInitialized, OrderModifyRejected, OrderPendingCancel, OrderPendingUpdate, OrderRejected,
     OrderReleased, OrderSubmitted, OrderTriggered, OrderUpdated, PositionChanged, PositionClosed, PositionOpened
+)
+from nautilus_trader.model.functions import (
+    account_type_to_str, aggregation_source_to_str, aggressor_side_to_str, asset_class_to_str,
+    instrument_class_to_str, bar_aggregation_to_str, book_action_to_str, book_type_to_str,
+    contingency_type_to_str, currency_type_to_str, instrument_close_type_to_str, liquidity_side_to_str,
+    market_status_to_str, market_status_action_to_str, order_side_to_str, oms_type_to_str,
+    option_kind_to_str, order_type_to_str, record_flag_to_str, time_in_force_to_str,
+    trading_state_to_str, trailing_offset_type_to_str, trigger_type_to_str,
 )
 from nautilus_trader.model.identifiers import (
     AccountId, ClientId, ClientOrderId, InstrumentId, OrderListId, PositionId, StrategyId, Symbol, TradeId, TraderId,
