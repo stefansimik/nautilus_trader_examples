@@ -53,9 +53,9 @@ The import reference will guide you to the correct choice.
 
 Any python package manager (conda, poetry, pyenv, virtualenv) will work with this project, but I can't recommend `uv` enough for the speed, reliability and comfort. It is really the best swiss-knife tool for:
 
-- installing python itself
-- managing dependencies
-- managing python environments
+- Installing python itself
+- Managing dependencies
+- Python environments
 
 **How to use `uv` with repo above:**
 
@@ -63,14 +63,24 @@ Any python package manager (conda, poetry, pyenv, virtualenv) will work with thi
    Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to get `uv` on your system.
 2. **Download the repository and switch into folder** 
    * `cd nautilus_trader_examples`
-3. **Run commands:**
-   * `uv sync --pre-release=allow`  
-      * This command reads file `pyproject.toml` containing python + all dependencies and installs them into newly created `.venv` folder
-      * Flag is `--pre-release=allow` is required to allow installation, because `cython` (dependency of `nautilus_trader`) is still in alpha version
-   * `source .venv/bin/activate`
-      * this command activates python environment from local `.venv` folder
+3. **Setup environment:**
+   1. Optional installation of required Python version
+      * `uv python install 3.12`
+         * This installs shared uv-managed Python and this step is required only if you don't have any Python in required version (3.11 or 3.12) installed in your system
+   1. Create local python environment in local `.env` folder meeting requirements in `pyproject.toml`
+      * `uv venv`
+   1. Activate newly created local Python env   
+      * MacOS/Unix: `source .venv/bin/activate`
+      * Windows: `.venv\Scripts\activate`
+   1. Sync all dependencies from `pyproject.toml` -> to Python venv
+      * `uv sync --prerelease=allow`  
+         * This command reads file `pyproject.toml` containing python + all dependencies and installs them into newly created `.venv` folder
+         * Flag is `--pre-release=allow` is required to allow installation, because `cython` (dependency of `nautilus_trader`) is still in alpha version
+   1. Run examples in the repo:
+      * `cd "src/0001 Load 1-min bars from CSV file"`  # switch to the 1st example directory
+      * `python run_backtest.py`                       # run example               
 
-You can also set up any IDE to refer to the `.venv` folder as Python environment, that you like PyCharm or VSCode.
+You can also set up any IDE to refer to the local `.venv` folder as Python environment, that you like PyCharm or VSCode.
 
 ### More resources about `uv` tool
 - **Tutorial:**  
