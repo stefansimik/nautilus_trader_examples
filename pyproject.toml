@@ -1,5 +1,5 @@
 [project]
-name = "nautilus-trader-examples"
+name = "nautilus_trader_examples"
 version = "0.1.0"
 description = "Demo examples of various strategies and features implemented in NautilusTrader."
 readme = "README.md"
