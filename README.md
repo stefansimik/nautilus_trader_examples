@@ -1,37 +1,37 @@
-# Nautilus Trader Examples
+# NautilusTrader Examples
 
 This is a community-driven collection of simple, easy-to-follow examples, showcasing various **strategies**
-and **features** of [Nautilus Trader](https://nautilus-trader.github.io/).  
+and **features** of [NautilusTrader](https://nautilus-trader.github.io/).  
 
-These examples are designed to help beginners in Nautilus Trader quickly get oriented and create their first strategies.
+These examples are designed to help beginners in NautilusTrader quickly get oriented and create their first strategies.
 
 ---
 
 ## Examples Overview
 
-| Example                                              |
-|:-----------------------------------------------------|
-| 0000 Starter template for examples                   |
-| 0001 Load 1-min bars from CSV file                   |
-| 0002 Use Clock's Timer and Alert + Bracket order     |
-| 0003 Use CacheConfig                                 |
-| 0004 Export data and use ParquetDataCatalog          |
+| Example                                             |
+|:----------------------------------------------------|
+| 0000 Starter template for examples                  |
+| 0001 Load 1-min bars from CSV file                  |
+| 0002 Use Clock's Timer and Alert + Bracket order    |
+| 0003 Use CacheConfig                                |
+| 0004 Export data and use ParquetDataCatalog         |
 | 0005 MRE (Minimalistic example with artificial bars) |
-| 0006 Internally generated 5-min bars                 |
-| 0007 Accessing Portfolio and Cache                   |
-| 0008 Simple indicator + Cascaded Indicator           |
-| 0009 Custom event with msgbus.publish()              |
-| 0010 Using Actor + publish_data()                    |
-| 0011 Using Actor + publish_signal()                  |
-| 0012 Finite State Machine                            |
-| 0013 Adaptive Bar Ordering (for OHLC bars)           |
-| 0014 EMA cross strategy (simple)                    |
+| 0006 Internally generated 5-min bars                |
+| 0007 Accessing Portfolio and Cache                  |
+| 0008 Simple indicator + Cascaded Indicator          |
+| 0009 Custom event with msgbus.publish()             |
+| 0010 Using Actor + publish_data()                   |
+| 0011 Using Actor + publish_signal()                 |
+| 0012 Finite State Machine                           |
+| 0013 Adaptive Bar Ordering (for OHLC bars)          |
+| 0014 MA cross strategy (simple, for any MA type)    |
 
 ---
 
 ## Import Reference
 
-To help developers navigate the extensive Nautilus Trader framework, we maintain a comprehensive import reference
+To help developers navigate the extensive NautilusTrader framework, we maintain a comprehensive import reference
 guide at file `src/!helpers/all_imports.py`. 
 
 This guide:
@@ -87,11 +87,13 @@ You can also set up any IDE to refer to the `.venv` folder as Python environment
 Contributions are highly appreciated! 🚀 
 
 Feel free to submit pull requests and share your own examples to make this repository even better!
+You can either add your own examples from scratch or use the starter template located in 
+`src/0000 Starter template for examples` as a foundation for your contribution.
 
-To maintain a high quality of examples, all contributions should meet the following criteria:  
+To maintain a quality of examples, all contributions should meet the following criteria:  
 
 1. **Minimalistic and focused:**  
-   * Examples should ideally be as simple as possible and clearly demonstrate the usage of a single concept, feature or area of Nautilus Trader.
+   * Examples should ideally be as simple as possible and clearly demonstrate the usage of a single concept, feature or area of NautilusTrader.
 2. **Self-contained:**  
    * Each example (and its directory) must include all the necessary components — such as code and required data — to run the example independently. 
    * If possible try to reuse existing market data
@@ -100,6 +102,6 @@ To maintain a high quality of examples, all contributions should meet the follow
 
 ---
 
-For more information about Nautilus Trader and its powerful trading infrastructure, check out the [official documentation](https://nautilus-trader.github.io/).  
+For more information about NautilusTrader and its powerful trading infrastructure, check out the [official documentation](https://nautilus-trader.github.io/).  
 
 Happy Trading and Coding! ✨

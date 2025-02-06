@@ -1,6 +1,6 @@
 # Import Reference Guide
 # ---------------------
-# This document serves as a comprehensive reference for Nautilus Trader imports,
+# This document serves as a comprehensive reference for NautilusTrader imports,
 # designed to help developers navigate the correct module paths. All imports are
 # organized alphabetically by module path for easy reference. Due to the framework's
 # extensive codebase, some classes share names across different modules (e.g., native
