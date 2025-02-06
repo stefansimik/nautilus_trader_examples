@@ -1,18 +1,21 @@
 [project]
-name = "nautilus-trader-demo-strategies"
+name = "nautilus-trader-examples"
 version = "0.1.0"
-description = "Demo examples of various strategies and features implemented in Nautilus Trader."
+description = "Demo examples of various strategies and features implemented in NautilusTrader."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11,<3.13"  # Copies supported versions of NautilusTrader (Python 3.11 or 3.12)
 dependencies = [
     "nautilus_trader==1.210.0",
+    # "nautilus_trader==1.211.0a20250205",  # Example of how to reference alpha/dev versions
 ]
 
-# Uncomment this only if you need to download alpha/dev versions from custom package index of Nautilus.
-# See latest releases: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
+
+## NautilusTrader package-index (contains also alpha/devepment builds)
+## Link to packages: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
 # [[tool.uv.index]]
 # name = "nautilus_pypi"
 # url = "https://packages.nautechsystems.io/simple"
+
 
 [tool.ruff]
 line-length = 30000  # we want to manage line length ourselves
