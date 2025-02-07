@@ -5,6 +5,8 @@ and **features** of [NautilusTrader](https://nautilus-trader.github.io/).
 
 These examples are designed to help beginners in NautilusTrader quickly get oriented and create their first strategies.
 
+Other common question: [FAQ](./faq.md)
+
 ---
 
 ## Examples Overview
