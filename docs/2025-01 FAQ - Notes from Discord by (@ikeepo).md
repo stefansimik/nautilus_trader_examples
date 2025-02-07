@@ -1,7 +1,7 @@
 # Nautilus Trader FAQ
 
-This document contains frequently asked questions about Nautilus Trader, collected by @ikeepo from community discussions
-on Discord. Note that Nautilus Trader is under active development, and documentation may not always be up to date.
+This document contains frequently asked questions about Nautilus Trader, collected by @ikeepo from [NautilusTrader - Discord server](https://discord.gg/AUWVs3XaCS).
+Note that Nautilus Trader is under active development, and documentation may not always be up to date.
 
 ## Data Processing and Aggregation
 

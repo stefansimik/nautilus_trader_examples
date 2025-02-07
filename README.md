@@ -33,9 +33,9 @@ All examples are in `/examples` folder.
 
 All examples are in `/docs` folder.
 
-| Docs                          |
-|:------------------------------|
-| 2025-01 FAQ - from @ikeepo.md |
+| Docs                                             |
+|:-------------------------------------------------|
+| 2025-01 FAQ - Notes from Discord (by @ikeepo).md |
 
 ---
 
