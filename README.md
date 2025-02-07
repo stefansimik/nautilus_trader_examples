@@ -5,29 +5,37 @@ and **features** of [NautilusTrader](https://nautilus-trader.github.io/).
 
 These examples are designed to help beginners in NautilusTrader quickly get oriented and create their first strategies.
 
-Other common question: [FAQ](./faq.md)
-
 ---
 
 ## Examples Overview
 
-| Example                                             |
-|:----------------------------------------------------|
-| 0000 Starter template for examples                  |
-| 0001 Load 1-min bars from CSV file                  |
-| 0002 Use Clock's Timer and Alert + Bracket order    |
-| 0003 Use CacheConfig                                |
-| 0004 Export data and use ParquetDataCatalog         |
+All examples are in `/examples` folder.
+
+| Examples                                             |
+|:-----------------------------------------------------|
+| 0000 Starter template for examples                   |
+| 0001 Load 1-min bars from CSV file                   |
+| 0002 Use Clock's Timer and Alert + Bracket order     |
+| 0003 Use CacheConfig                                 |
+| 0004 Export data and use ParquetDataCatalog          |
 | 0005 MRE (Minimalistic example with artificial bars) |
-| 0006 Internally generated 5-min bars                |
-| 0007 Accessing Portfolio and Cache                  |
-| 0008 Simple indicator + Cascaded Indicator          |
-| 0009 Custom event with msgbus.publish()             |
-| 0010 Using Actor + publish_data()                   |
-| 0011 Using Actor + publish_signal()                 |
-| 0012 Finite State Machine                           |
-| 0013 Adaptive Bar Ordering (for OHLC bars)          |
-| 0014 MA cross strategy (simple, for any MA type)    |
+| 0006 Internally generated 5-min bars                 |
+| 0007 Accessing Portfolio and Cache                   |
+| 0008 Simple indicator + Cascaded Indicator           |
+| 0009 Custom event with msgbus.publish()              |
+| 0010 Using Actor + publish_data()                    |
+| 0011 Using Actor + publish_signal()                  |
+| 0012 Finite State Machine                            |
+| 0013 Adaptive Bar Ordering (for OHLC bars)           |
+| 0014 MA cross strategy (simple, for any MA type)     |
+
+## Learning materials & Docs
+
+All examples are in `/docs` folder.
+
+| Docs                          |
+|:------------------------------|
+| 2025-01 FAQ - from @ikeepo.md |
 
 ---
 
