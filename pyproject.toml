@@ -5,17 +5,24 @@ description = "Demo examples of various strategies and features implemented in N
 readme = "README.md"
 requires-python = ">=3.11,<3.13"  # Copies supported versions of NautilusTrader (Python 3.11 or 3.12)
 dependencies = [
-    "nautilus_trader==1.210.0",
-    # "nautilus_trader==1.211.0a20250205",  # Example of how to reference alpha/dev versions
+    "nautilus_trader==1.210.0",  # latest alpha version look like this: nautilus_trader==1.211.0a20250206
 ]
 
+# Define which packages should be downloaded from which package-index
+[tool.uv.sources]
+nautilus_trader = { index = "pypi_nautilus" }
 
-## NautilusTrader package-index (contains also alpha/devepment builds)
-## Link to packages: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
-# [[tool.uv.index]]
-# name = "nautilus_pypi"
-# url = "https://packages.nautechsystems.io/simple"
+# Package index: Standard Python
+[[tool.uv.index]]
+name = "pypi_classic"
+url = "https://pypi.org/simple"
 
+## Package index: NautilusTrader custom index containing also alpha/devepment builds
+## Link to see available packages: https://packages.nautechsystems.io/simple/nautilus-trader/index.html
+[[tool.uv.index]]
+name = "pypi_nautilus"
+url = "https://packages.nautechsystems.io/simple"
+explicit = true  # use this index only for explicitly configured dependencies. No other packages won't be installd from this index
 
 [tool.ruff]
 line-length = 30000  # we want to manage line length ourselves
