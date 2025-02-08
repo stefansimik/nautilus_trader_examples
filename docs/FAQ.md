@@ -103,3 +103,6 @@ You can measure latency by:
 Currently, no specific data wrangler exists for Binance data, but it's being considered for future implementation:
 - Could implement a DataFrame-based wrangler
 - Alternatively, might add a specific loader similar to Databento or Tardis
+
+### Q: [ERROR] TRADER-000.Portfolio: Cannot calculate account state: insufficient data for USDT/USD
+This is because you set balance USD rather USDT, just search for USD to locate it and replace.
