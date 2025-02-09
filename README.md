@@ -50,7 +50,7 @@ This guide:
 - Helps prevent common import-related issues (e.g., when importing native Python vs PyO3 bindings)
 - Makes it easier to find and use the framework's components
 
-For example, when implementing technical indicators, beginners might wonder which import should they use (these could be offered by IDEs):
+For example, beginners might wonder which import should they use (all 4 imports could be offered by IDEs):
 ```python
 from nautilus_trader.common.enums import LogColor               # ✓ This is the right one
 from nautilus_trader.core.nautilus_pyo3 import LogColor         # ✗ Not recommended
