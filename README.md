@@ -69,11 +69,11 @@ Any python package manager (conda, poetry, pyenv, virtualenv) will work with thi
 
 **How to use `uv` with repo above:**
 
-1. **Install `uv` (one-time setup):**  
+1. Install `uv` (one-time setup):  
    Follow the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to get `uv` on your system.
-2. **Download the repository and switch into folder** 
+2. Download the repository and switch into folder:
    * `cd nautilus_trader_examples`
-3. **Setup environment:**
+3. Setup environment:
    1. Optional installation of required Python version
       * `uv python install 3.12`
          * This installs shared uv-managed Python and this step is required only if you don't have any Python in required version (3.11 or 3.12) installed in your system
