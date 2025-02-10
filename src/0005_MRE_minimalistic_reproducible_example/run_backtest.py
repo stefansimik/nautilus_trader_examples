@@ -8,7 +8,13 @@ from nautilus_trader.core.datetime import dt_to_unix_nanos
 from nautilus_trader.model.currencies import USD
 from nautilus_trader.model.data import Bar, BarSpecification, BarType
 from nautilus_trader.model.enums import (
-    AccountType, BarAggregation, OmsType, OrderSide, PriceType, TimeInForce)
+    AccountType,
+    BarAggregation,
+    OmsType,
+    OrderSide,
+    PriceType,
+    TimeInForce,
+)
 from nautilus_trader.model.identifiers import InstrumentId, TraderId, Venue
 from nautilus_trader.model.objects import Money, Quantity
 from nautilus_trader.test_kit.providers import TestInstrumentProvider
@@ -102,8 +108,7 @@ if __name__ == "__main__":
             low=instrument.make_price(1.10000 + i * increment),
             close=instrument.make_price(1.10000 + i * increment),
             volume=Quantity.from_int(999999),
-            ts_event=timestamp_base
-            + (i * 60 * 1_000_000_000),  # +1 minute (in nanoseconds)
+            ts_event=timestamp_base + (i * 60 * 1_000_000_000),  # +1 minute (in nanoseconds)
             ts_init=timestamp_base + (i * 60 * 1_000_000_000),
         )
         bars.append(bar)
@@ -132,9 +137,7 @@ if __name__ == "__main__":
         None,
     ):
         n_dashes = 50
-        print(
-            f"\n{'-' * n_dashes}\nAccount report for venue: {venue}\n{'-' * n_dashes}"
-        )
+        print(f"\n{'-' * n_dashes}\nAccount report for venue: {venue}\n{'-' * n_dashes}")
         print(engine.trader.generate_account_report(venue))
 
         print(f"\n{'-' * n_dashes}\nOrder fills report: {venue}\n{'-' * n_dashes}")

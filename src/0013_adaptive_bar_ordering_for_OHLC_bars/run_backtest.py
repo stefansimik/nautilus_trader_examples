@@ -7,8 +7,7 @@ from nautilus_trader.config import BacktestEngineConfig, LoggingConfig, Strategy
 from nautilus_trader.core.datetime import dt_to_unix_nanos
 from nautilus_trader.model.currencies import USD
 from nautilus_trader.model.data import Bar, BarSpecification, BarType
-from nautilus_trader.model.enums import (
-    AccountType, BarAggregation, OmsType, PriceType)
+from nautilus_trader.model.enums import AccountType, BarAggregation, OmsType, PriceType
 from nautilus_trader.model.identifiers import InstrumentId, TraderId, Venue
 from nautilus_trader.model.objects import Money, Quantity
 from nautilus_trader.test_kit.providers import TestInstrumentProvider
@@ -61,7 +60,6 @@ if __name__ == "__main__":
         # If bar_adaptive_high_low_ordering=False,
         #   then Nautilus uses fixed static OHLC order (High is first always)
         bar_adaptive_high_low_ordering=True,
-
         # Run strategy and see the debug logs, how bar_adaptive_high_low_ordering=True
         # ensures, that first High / Low is simulated based on statistical probability.
     )
@@ -133,9 +131,7 @@ if __name__ == "__main__":
         None,
     ):
         n_dashes = 50
-        print(
-            f"\n{'-' * n_dashes}\nAccount report for venue: {venue}\n{'-' * n_dashes}"
-        )
+        print(f"\n{'-' * n_dashes}\nAccount report for venue: {venue}\n{'-' * n_dashes}")
         print(engine.trader.generate_account_report(venue))
 
         print(f"\n{'-' * n_dashes}\nOrder fills report: {venue}\n{'-' * n_dashes}")

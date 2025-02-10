@@ -1,6 +1,6 @@
 import pandas as pd
 from nautilus_trader.backtest.engine import BacktestEngine, Decimal
-from nautilus_trader.backtest.models import (FillModel, PerContractFeeModel)
+from nautilus_trader.backtest.models import FillModel, PerContractFeeModel
 from nautilus_trader.config import BacktestEngineConfig, LoggingConfig
 from nautilus_trader.indicators.average.moving_average import MovingAverageType
 from nautilus_trader.model import TraderId
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # Engine: configure + create
     engine_config = BacktestEngineConfig(
         trader_id=TraderId("BACKTEST_TRADER-001"),
-        logging=LoggingConfig(log_level="INFO", log_level_file='DEBUG', log_directory='logs'),
+        logging=LoggingConfig(log_level="INFO", log_level_file="DEBUG", log_directory="logs"),
     )
     engine = BacktestEngine(config=engine_config)
 
@@ -36,19 +36,21 @@ if __name__ == "__main__":
         default_leverage=Decimal(1),
         fill_model=FillModel(
             prob_fill_on_limit=0,  # 0 = 0% probability = never fill market touches limit price
-            prob_fill_on_stop=0,   # 0 = 0% probability =  never fill at stop-price when market touches stop-price
-            prob_slippage=1,       # 1 = 100% probability =  always simulate 1-tick slippage with market order
-            random_seed=42,        # fixed random seed for reproducible results
-        )
+            prob_fill_on_stop=0,  # 0 = 0% probability =  never fill at stop-price when market touches stop-price
+            prob_slippage=1,  # 1 = 100% probability =  always simulate 1-tick slippage with market order
+            random_seed=42,  # fixed random seed for reproducible results
+        ),
     )
 
     # Instrument: create + add to engine
-    eurusd_future_instrument = (utils_instruments.eurusd_future(2024, 3, venue.value))
+    eurusd_future_instrument = utils_instruments.eurusd_future(2024, 3, venue.value)
     engine.add_instrument(eurusd_future_instrument)
 
     # BAR DATA: LOAD FROM CSV + ADD TO ENGINE
     # Step 1: Define bar type
-    eurusd_future_1min_bar_type = BarType.from_str(f"{eurusd_future_instrument.id}-1-MINUTE-LAST-EXTERNAL")
+    eurusd_future_1min_bar_type = BarType.from_str(
+        f"{eurusd_future_instrument.id}-1-MINUTE-LAST-EXTERNAL"
+    )
     # Step 2: Load bar data from CSV file
     eurusd_futures_1min_bars_list: list[Bar] = utils_csv.load_bars_from_ninjatrader_csv(
         csv_path=r"../!market_data/cme/futures/fx/6EH4.GLBX_1min_bars_20240101_20240131.csv",
@@ -74,9 +76,9 @@ if __name__ == "__main__":
 
     # Run engine = Run backtest
     engine.run(
-        start=None, #'2024-01-25',  # if start is not specified = any first data, that will come will be processed
-        end='2024-01-03',
-        streaming=False
+        start=None,  #'2024-01-25',  # if start is not specified = any first data, that will come will be processed
+        end="2024-01-03",
+        streaming=False,
     )
 
     # Optionally print additional strategy results

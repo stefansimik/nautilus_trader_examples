@@ -14,6 +14,7 @@ class DemoStrategyConfig(StrategyConfig, frozen=True):
     instrument: Instrument
     primary_bar_type: BarType
 
+
 class DemoStrategy(Strategy):
     def __init__(self, config: DemoStrategyConfig):
         super().__init__(config)
@@ -77,7 +78,9 @@ class DemoStrategy(Strategy):
         # Value at 5-bars back is at index 4 (indexing start with 0)
         ema10_value_5_bars_back = self.indicator_ema10_history[4]
 
-        self.log.info(f"EMA(10) latest: {ema10_last_value}, EMA(10) from history: {ema10_last_value_from_history}, EMA(10) 5 bars ago: {ema10_value_5_bars_back}")
+        self.log.info(
+            f"EMA(10) latest: {ema10_last_value}, EMA(10) from history: {ema10_last_value_from_history}, EMA(10) 5 bars ago: {ema10_value_5_bars_back}"
+        )
 
     def on_stop(self):
         self.log.info(f"Total 1-min bars processed: {self.bars_1min_processed}")

@@ -10,6 +10,7 @@ class DemoStrategyConfig(StrategyConfig, frozen=True):
     instrument: Instrument
     primary_bar_type: BarType
 
+
 class DemoStrategy(Strategy):
     def __init__(self, config: DemoStrategyConfig):
         super().__init__(config)
@@ -30,8 +31,8 @@ class DemoStrategy(Strategy):
             # Create order
             order = self.order_factory.market(
                 instrument_id=self.config.instrument.id,
-                order_side = OrderSide.BUY,
-                quantity=Quantity.from_int(1)
+                order_side=OrderSide.BUY,
+                quantity=Quantity.from_int(1),
             )
             # Submit order
             self.log.info("Submitting entry order.")

@@ -8,6 +8,11 @@ dependencies = [
     "nautilus_trader==1.211.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pre-commit==4.1.0",
+]
+
 # Define which packages should be downloaded from which package-index
 [tool.uv.sources]
 nautilus_trader = { index = "pypi_nautilus" }

@@ -1,6 +1,7 @@
 from nautilus_trader.common.actor import Actor
 from nautilus_trader.model.data import BarType
 
+
 # This actor will generate and publish signal.
 # Another Actor/Strategy can subscribe to this signal.
 class BarCountDataActor(Actor):

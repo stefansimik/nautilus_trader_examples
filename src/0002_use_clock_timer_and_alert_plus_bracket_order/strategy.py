@@ -42,7 +42,7 @@ class DemoStrategy(Strategy):
 
     def on_bar(self, bar: Bar):
         self.bars_1min_processed += 1  # Just count 1-min bars
-        self.last_price = bar.close    # Remember last price
+        self.last_price = bar.close  # Remember last price
 
     def on_timer(self, event: TimeEvent):
         if event.name == "every_minute":
@@ -80,7 +80,8 @@ class DemoStrategy(Strategy):
 
             self.submit_order_list(bracket_order)
             self.log.info(
-                f"Submitted bracket order: entry @ market, TP @ {profit_price}, SL @ {stop_price}")
+                f"Submitted bracket order: entry @ market, TP @ {profit_price}, SL @ {stop_price}"
+            )
 
     def on_stop(self):
         self.log.info(f"Total 1-min bars processed: {self.bars_1min_processed}")

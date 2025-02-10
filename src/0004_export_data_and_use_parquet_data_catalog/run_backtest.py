@@ -33,15 +33,17 @@ if __name__ == "__main__":
         starting_balances=[Money(1_000_000, USD)],  # Initial balance
         fee_model=PerContractFeeModel(commission=Money(2.50, USD)),
         base_currency=USD,  # Base currency for the venue
-        default_leverage=Decimal(1)
+        default_leverage=Decimal(1),
     )
 
     # Instrument: create + add to engine
-    eurusd_future_instrument = (utils_instruments.eurusd_future(2024, 3, venue.value))
+    eurusd_future_instrument = utils_instruments.eurusd_future(2024, 3, venue.value)
     engine.add_instrument(eurusd_future_instrument)
 
     # Step Define bar type
-    eurusd_future_1min_bar_type = BarType.from_str(f"{eurusd_future_instrument.id}-1-MINUTE-LAST-EXTERNAL")
+    eurusd_future_1min_bar_type = BarType.from_str(
+        f"{eurusd_future_instrument.id}-1-MINUTE-LAST-EXTERNAL"
+    )
 
     # Step Load bar data from CSV file
     eurusd_futures_1min_bars_list: list[Bar] = utils_csv.load_bars_from_ninjatrader_csv(
@@ -86,7 +88,9 @@ if __name__ == "__main__":
     engine.add_data(euro_futures_bars_from_parquet)
 
     # Strategy: Configure -> create -> add to engine
-    strategy_config = DemoStrategyConfig(instrument=eurusd_future_instrument, primary_bar_type=eurusd_future_1min_bar_type)
+    strategy_config = DemoStrategyConfig(
+        instrument=eurusd_future_instrument, primary_bar_type=eurusd_future_1min_bar_type
+    )
     strategy = DemoStrategy(strategy_config)
     engine.add_strategy(strategy)
 
@@ -94,7 +98,7 @@ if __name__ == "__main__":
     engine.run(
         start=None,  # if start is not specified = any first data, that will come will be processed
         end=None,
-        streaming=False
+        streaming=False,
     )
 
     # Optionally print additional strategy results

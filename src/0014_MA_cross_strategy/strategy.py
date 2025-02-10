@@ -35,8 +35,12 @@ class MACrossStrategy(Strategy):
         )
 
         # Create indicators
-        self.ma_fast = MovingAverageFactory.create(period=config.ma_fast_period, ma_type=config.ma_type)
-        self.ma_slow = MovingAverageFactory.create(period=config.ma_slow_period, ma_type=config.ma_type)
+        self.ma_fast = MovingAverageFactory.create(
+            period=config.ma_fast_period, ma_type=config.ma_type
+        )
+        self.ma_slow = MovingAverageFactory.create(
+            period=config.ma_slow_period, ma_type=config.ma_type
+        )
 
     def on_start(self):
         # Connect indicators with bar-type for automatic updating
@@ -52,20 +56,27 @@ class MACrossStrategy(Strategy):
         # Wait until all registered indicators are initialized
         if not self.indicators_initialized():
             count_of_bars = self.cache.bar_count(self.config.primary_bar_type)
-            self.log.info(f"Waiting for indicators to warm initialize. | Bars count {count_of_bars}", color=LogColor.BLUE)
+            self.log.info(
+                f"Waiting for indicators to warm initialize. | Bars count {count_of_bars}",
+                color=LogColor.BLUE,
+            )
             return
 
         # Note: If we got here, all registered indicator are initialized
 
         # BUY LOGIC
-        if self.ma_fast.value > self.ma_slow.value:                     # If fast EMA is above slow EMA
-            if self.portfolio.is_flat(self.config.instrument.id):       # If we are flat
-                self.cancel_all_orders(self.config.instrument.id)       # Make sure all waiting orders are cancelled
-                self.fire_trade(OrderSide.BUY, bar)                     # Fire buy order
+        if self.ma_fast.value > self.ma_slow.value:  # If fast EMA is above slow EMA
+            if self.portfolio.is_flat(self.config.instrument.id):  # If we are flat
+                self.cancel_all_orders(
+                    self.config.instrument.id
+                )  # Make sure all waiting orders are cancelled
+                self.fire_trade(OrderSide.BUY, bar)  # Fire buy order
             if self.portfolio.is_net_short(self.config.instrument.id):  # We are short already
-                self.cancel_all_orders(self.config.instrument.id)       # Make sure all waiting orders are cancelled
-                self.close_all_positions(self.config.instrument.id)     # Let's close current position
-                self.fire_trade(OrderSide.BUY, bar)                     # Fire buy order
+                self.cancel_all_orders(
+                    self.config.instrument.id
+                )  # Make sure all waiting orders are cancelled
+                self.close_all_positions(self.config.instrument.id)  # Let's close current position
+                self.fire_trade(OrderSide.BUY, bar)  # Fire buy order
 
         # SELL LOGIC
         if self.ma_fast.value < self.ma_slow.value:
@@ -82,13 +93,21 @@ class MACrossStrategy(Strategy):
 
         # Prepare profit/stoploss prices
         if order_side == OrderSide.BUY:
-            profit_price = last_price + self.config.profit_in_ticks * self.config.instrument.price_increment
-            stoploss_price = last_price - self.config.stoploss_in_ticks * self.config.instrument.price_increment
+            profit_price = (
+                last_price + self.config.profit_in_ticks * self.config.instrument.price_increment
+            )
+            stoploss_price = (
+                last_price - self.config.stoploss_in_ticks * self.config.instrument.price_increment
+            )
         elif order_side == OrderSide.SELL:
-            profit_price = last_price - self.config.profit_in_ticks * self.config.instrument.price_increment
-            stoploss_price = last_price + self.config.stoploss_in_ticks * self.config.instrument.price_increment
+            profit_price = (
+                last_price - self.config.profit_in_ticks * self.config.instrument.price_increment
+            )
+            stoploss_price = (
+                last_price + self.config.stoploss_in_ticks * self.config.instrument.price_increment
+            )
         else:
-            raise ValueError(f'Order side: {order_side} is not supported.')
+            raise ValueError(f"Order side: {order_side} is not supported.")
 
         # Prepare bracket order (bracket order is entry order with related contingent profit / stoploss orders)
         bracket_order_list: OrderList = self.order_factory.bracket(
@@ -96,13 +115,20 @@ class MACrossStrategy(Strategy):
             order_side=order_side,
             quantity=self.config.instrument.make_qty(self.config.trade_size),
             entry_order_type=OrderType.MARKET,  # enter trade with MARKET order
-            sl_trigger_price=self.config.instrument.make_price(stoploss_price),  # stoploss is always MARKET order (fixed in Nautilus)
+            sl_trigger_price=self.config.instrument.make_price(
+                stoploss_price
+            ),  # stoploss is always MARKET order (fixed in Nautilus)
             tp_order_type=OrderType.LIMIT,  # profit is LIMIT order
-            tp_price=self.config.instrument.make_price(profit_price),  # set price for profit LIMIT order
+            tp_price=self.config.instrument.make_price(
+                profit_price
+            ),  # set price for profit LIMIT order
         )
 
         # Log order
-        self.log.info(f"Order: {order_side_to_str(order_side)} | Last price: {last_price} | Profit: {profit_price} | Stoploss: {stoploss_price}", color=LogColor.BLUE)
+        self.log.info(
+            f"Order: {order_side_to_str(order_side)} | Last price: {last_price} | Profit: {profit_price} | Stoploss: {stoploss_price}",
+            color=LogColor.BLUE,
+        )
 
         # Submit order
         self.submit_order_list(bracket_order_list)
