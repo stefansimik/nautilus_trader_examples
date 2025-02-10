@@ -1,6 +1,8 @@
 # FAQ
 
-This document contains frequently asked questions (FAQ) about Nautilus Trader, collected by @ikeepo from [NautilusTrader - Discord server](https://discord.gg/AUWVs3XaCS).
+This document contains frequently asked questions (FAQ) about Nautilus Trader, collected from 
+[NautilusTrader - Discord server](https://discord.gg/AUWVs3XaCS).
+
 Note that Nautilus Trader is under active development, and documentation may not always be up to date.
 
 ## Data Processing and Aggregation
@@ -10,16 +12,6 @@ If you add tick data to the BacktestNode or BacktestEngine, the DataEngine can s
 
 ### Q: Can higher timeframe bars be created from lower timeframe bars?
 Definitely, this is very easy to do and you can find a lot of examples for this - see example: `0006_internally_generated_5min_bars`.
-
-### Q: What are the recommended tools for real-time tick-level data visualization?
-NautilusTrader does not provide any visualization framework. You need to use external libraries.
-
-* **Plotly**: [Getting started with Plotly in Python](https://plotly.com/python/)
-   * [See example](https://html-preview.github.io/?url=https://github.com/stefansimik/dev_demos/blob/main/plotly_trading_charts/Plotly%20-%20Trading%20charts%20examples.html) 
-* **lightweight-charts-python**: https://github.com/louisnw01/lightweight-charts-python (Python framework for TradingView's Lightweight Charts JavaScript library)
-* **mplchart**: https://github.com/furechan/mplchart (Classic Stock Charts in Python)
-* **mplfinance**: https://github.com/matplotlib/mplfinance (Financial Markets Data Visualization using Matplotlib)
-* **finplot**: https://github.com/highfestiva/finplot (Performant and effortless finance plotting for Python)
 
 ## Order Book and Market Data
 
@@ -100,3 +92,38 @@ Currently, no specific data wrangler exists for Binance data, but it's being con
 
 ### Q: If you get error: TRADER-000.Portfolio: Cannot calculate account state: insufficient data for USDT/USD
 This is because you set balance USD rather USDT, just search for USD to locate it and replace.
+
+## Useful libraries and links
+
+### Collections / Curated lists
+
+* **awesome-quant**: https://github.com/wilsonfreitas/awesome-quant (A curated list of insanely awesome libraries, packages and resources for Quants)
+
+### Backtesting
+
+* **Backtesting.py**: https://github.com/kernc/backtesting.py (Backtest trading strategies in Python)
+* **QuantStats**: https://github.com/ranaroussi/quantstats (Portfolio analytics for quants, written in Python)
+
+### Charting
+
+* **Plotly**: [Getting started with Plotly in Python](https://plotly.com/python/)
+   * [See example](https://html-preview.github.io/?url=https://github.com/stefansimik/dev_demos/blob/main/plotly_trading_charts/Plotly%20-%20Trading%20charts%20examples.html)
+* **lightweight-charts-python**: https://github.com/louisnw01/lightweight-charts-python (Python framework for TradingView's Lightweight Charts JavaScript library)
+* **mplchart**: https://github.com/furechan/mplchart (Classic Stock Charts in Python)
+* **mplfinance**: https://github.com/matplotlib/mplfinance (Financial Markets Data Visualization using Matplotlib)
+* **finplot**: https://github.com/highfestiva/finplot (Performant and effortless finance plotting for Python)
+
+### Indicators
+
+* **pandas-ta**: https://github.com/twopirllc/pandas-ta  (Technical Analysis Indicators - Pandas TA is an easy to use Python 3 Pandas Extension with 150+ Indicators)
+* **streaming_indicators**: https://github.com/mr-easy/streaming_indicators (A python library for computing technical analysis indicators on streaming data)
+* **pytrendseries**: https://github.com/rafa-rod/pytrendseries (Detect trend in time series, drawdown, drawdown within a constant look-back window , maximum drawdown, time underwater)
+* **pandas_talib**: https://github.com/femtotrader/pandas_talib (A Python Pandas implementation of technical analysis indicators)
+* **finta**: https://github.com/peerchemist/finta (Common financial technical indicators implemented in Pandas)
+* **talipp**: https://github.com/nardew/talipp (talipp - incremental technical analysis library for python)
+* **market_analy**: https://github.com/maread99/market_analy (Analysis of financial instruments)
+
+### Calendars
+
+* **pandas_market_calendars**: https://github.com/rsheftel/pandas_market_calendars (Exchange calendars to use with pandas for trading applications)
+* **exchange_calendars**: https://github.com/gerrymanoim/exchange_calendars (Calendars for various securities exchanges)
