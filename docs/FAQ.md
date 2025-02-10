@@ -9,7 +9,7 @@ Note that Nautilus Trader is under active development, and documentation may not
 If you add tick data to the BacktestNode or BacktestEngine, the DataEngine can subscribe to this data to build internally aggregated bars. The data source doesn't matter - it can come from either a catalog or elsewhere, as long as it's available to the DataEngine.
 
 ### Q: Can higher timeframe bars be created from lower timeframe bars?
-No. Internal bar aggregation only works with tick data. For example, you cannot create 5-minute bars from 1-minute bars.
+Definitely, this is very easy to do and you can find a lot of examples for this - see example: `0006_internally_generated_5min_bars`.
 
 ### Q: What are the recommended tools for real-time tick-level data visualization?
 Several options are available:
