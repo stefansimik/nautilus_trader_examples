@@ -25,10 +25,17 @@ from nautilus_trader.backtest.engine import BacktestEngine, BacktestEngineConfig
 from nautilus_trader.backtest.models import (
     FeeModel, FillModel, FixedFeeModel, MakerTakerFeeModel, PerContractFeeModel)
 from nautilus_trader.cache import Cache, CacheDatabaseAdapter
-from nautilus_trader.common import Environment, Actor, ActorExecutor
-from nautilus_trader.common.component import LiveClock, MessageBus, TestClock, TimeEvent
+from nautilus_trader.common import Environment
+from nautilus_trader.common.actor import Actor
+from nautilus_trader.common.component import (
+    LiveClock, TestClock, MessageBus, TimeEventHandler, Subscription, Logger
+)
 from nautilus_trader.common.config import NautilusConfig
 from nautilus_trader.common.enums import ComponentState, ComponentTrigger, LogColor, LogLevel
+
+from  nautilus_trader.common.events import ComponentStateChanged, RiskEvent, TimeEvent, TradingStateChanged
+
+from nautilus_trader.common.executor import ActorExecutor
 from nautilus_trader.common.factories import OrderFactory
 from nautilus_trader.common.functions import format_utc_timerange
 from nautilus_trader.common.providers import InstrumentProvider
