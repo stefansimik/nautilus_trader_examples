@@ -3,9 +3,9 @@ name = "nautilus_trader_examples"
 version = "0.1.0"
 description = "Demo examples of various strategies and features implemented in NautilusTrader."
 readme = "README.md"
-requires-python = ">=3.11,<3.13"  # Copies supported versions of NautilusTrader (Python 3.11 or 3.12)
+requires-python = "==3.12.*"
 dependencies = [
-    "nautilus_trader==1.210.0",  # latest alpha version look like this: nautilus_trader==1.211.0a20250206
+    "nautilus_trader==1.211.0",
 ]
 
 # Define which packages should be downloaded from which package-index
@@ -25,6 +25,9 @@ url = "https://packages.nautechsystems.io/simple"
 explicit = true  # use this index only for explicitly configured dependencies. No other packages won't be installd from this index
 
 [tool.ruff]
-line-length = 30000  # we want to manage line length ourselves
+line-length = 100
 fix = true
 show-fixes = true
+exclude = [
+    "src/!helpers/all_imports.py",  # contains unused example imports for beginners and we don't want them to be removed
+]
