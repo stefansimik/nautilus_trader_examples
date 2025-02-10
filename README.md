@@ -42,7 +42,7 @@ All examples are in `/docs` folder.
 ## Import Reference
 
 To help developers navigate the extensive NautilusTrader framework, we maintain a comprehensive import reference
-guide at file `src/!helpers/all_imports.py`. 
+guide at file [all_imports.py](https://github.com/stefansimik/nautilus_trader_examples/blob/main/src/!helpers/all_imports.py). 
 
 This guide:
 

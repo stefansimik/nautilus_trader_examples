@@ -13,6 +13,10 @@
 # from nautilus_trader.core.nautilus_pyo3.common import LogColor  # ✗ Not recommended
 # from nautilus_trader.core.rust.common import LogColor           # ✗ Not recommended
 
+# General pattern is, that you can ignore all imports containing strings:
+# * `pyo3`
+# * `rust`
+
 from nautilus_trader.analysis.statistic import PortfolioStatistic
 from nautilus_trader.analysis.statistics.loser_avg import AvgLoser
 from nautilus_trader.analysis.statistics.win_rate import WinRate
