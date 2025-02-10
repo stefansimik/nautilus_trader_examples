@@ -12,12 +12,14 @@ If you add tick data to the BacktestNode or BacktestEngine, the DataEngine can s
 Definitely, this is very easy to do and you can find a lot of examples for this - see example: `0006_internally_generated_5min_bars`.
 
 ### Q: What are the recommended tools for real-time tick-level data visualization?
-Several options are available:
-- Grafana for monitoring
-- TradingView Plot Library (Python wrapper available)
-- PyQtGraph
-- Fastht
-Note: While Bokeh is an option, users have reported performance issues with large tick datasets.
+NautilusTrader does not provide any visualization framework. You need to use external libraries.
+
+* **Plotly**: [Getting started with Plotly in Python](https://plotly.com/python/)
+   * [See example](https://html-preview.github.io/?url=https://github.com/stefansimik/dev_demos/blob/main/plotly_trading_charts/Plotly%20-%20Trading%20charts%20examples.html) 
+* **lightweight-charts-python**: https://github.com/louisnw01/lightweight-charts-python (Python framework for TradingView's Lightweight Charts JavaScript library)
+* **mplchart**: https://github.com/furechan/mplchart (Classic Stock Charts in Python)
+* **mplfinance**: https://github.com/matplotlib/mplfinance (Financial Markets Data Visualization using Matplotlib)
+* **finplot**: https://github.com/highfestiva/finplot (Performant and effortless finance plotting for Python)
 
 ## Order Book and Market Data
 
@@ -40,7 +42,7 @@ To avoid interference with indicators:
 1. Wait for historical data request completion before subscribing
 2. Use the callback to subscribe after indicators are updated
 3. Refer to `examples/backtest/databento_test_request_bars.py` for implementation details
-4. Use the `request_data` method with appropriate metadata
+4. Use the `request_data` method with appropriate metadatad
 5. Use the client parameter to ensure proper query handling
 
 ## Backtesting Configuration
@@ -78,20 +80,12 @@ Also set the environment variable: `RUST_LOG=debug`
 
 ## Exchange Integration
 
-### Q: Why doesn't Nautilus use CCXT for crypto exchange integration?
-Several reasons:
-- Past experience with frequent breaking changes
-- Limited API feature support
-- Need for direct exchange API access
-- WebSocket streaming requires paid license
-- User friction with licensing model
-
 ### Q: How do I configure leverage for specific instruments on Binance Futures?
 Currently, individual instrument leverage adjustment must be done through the exchange GUI.
 
 ### Q: Can I monitor websocket latency for order confirmations?
 You can measure latency by:
-- Comparing OrderAccepted event's ts_init with order submission time
+- Comparing OrderAccepted event's `ts_init` with order submission time
 - Using the strategy's on_order_accepted handler
 - For most purposes, this provides sufficient accuracy (millisecond level)
 
@@ -104,5 +98,5 @@ Currently, no specific data wrangler exists for Binance data, but it's being con
 - Could implement a DataFrame-based wrangler
 - Alternatively, might add a specific loader similar to Databento or Tardis
 
-### Q: [ERROR] TRADER-000.Portfolio: Cannot calculate account state: insufficient data for USDT/USD
+### Q: If you get error: TRADER-000.Portfolio: Cannot calculate account state: insufficient data for USDT/USD
 This is because you set balance USD rather USDT, just search for USD to locate it and replace.
