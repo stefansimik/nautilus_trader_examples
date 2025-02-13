@@ -18,15 +18,6 @@ Definitely, this is very easy to do and you can find a lot of examples for this 
 ### Q: Does Nautilus Trader support order book data?
 Yes, Nautilus can handle up to L3 (full depth) order book data. However, for backtesting, you need to provide this data yourself.
 
-### Q: How can I convert Binance data for use with Nautilus Trader?
-Examples of data conversion can be found in the repository, specifically in the `examples/backtest/crypto_ema_cross_ethusdt_trailing_stop.py` file.
-
-### Q: Where can I find Level 3 order book data for ES and NQ futures?
-Several data vendors provide this data:
-- Databento
-- Polygon
-- DXFeed
-
 ## Historical Data and Indicators
 
 ### Q: How should I handle historical data requests and live subscriptions?
@@ -48,19 +39,38 @@ Slippage simulation varies based on data type:
   - Remainder fills at next level
   - Can be disabled with `slip_and_fill_market_orders=False`
 
+## Development Environment Setup
+
+### Q: How can I fix PyCharm not recognizing NautilusTrader imports?
+If you're experiencing issues with PyCharm not recognizing some or all NautilusTrader imports, follow these steps:
+
+1. Ensure you have the latest **PyCharm** version installed (current is 2024.3.2 from Jan 27, 2025)
+   * It's recommended to use [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/) to download directly from JetBrains, as other tools like older versions of Anaconda may not provide the latest version
+   * This is especially important if you're using an older version
+2. Invalidate all caches in PyCharm: `File -> Invalidate Caches...`
+3. Close all PyCharm instances -->  Open your project folder  --> delete the `.idea` folder (this removes all project related settings)
+4. Reopen PyCharm with your project and reconfigure your Python interpreter
+   * Go to `Settings -> Project: -> Python Interpreter`
+
 ## Logging and Debugging
 
 ### Q: How can I enable additional logging?
 To enable enhanced logging, including Rust network logging:
 
 ```python
-logging = LoggingConfig(
-    log_level="INFO",
-    use_pyo3=True,
+engine_config = BacktestEngineConfig(
+        trader_id=TraderId("BACKTEST_TRADER-001"),
+        logging=LoggingConfig(
+          log_level="INFO",        # set level for terminal logging
+          log_level_file="DEBUG",  # set level for file logging
+          log_directory="logs",    # set your own directory
+          use_pyo3=False,          # useful for seeing logs originating from Rust
+        ),
+    )
 )
 ```
 
-Also set the environment variable: `RUST_LOG=debug`
+Also set the environment variable: `RUST_LOG=debug`, to enable logs from Rust directly.
 
 ## Network Handling
 
@@ -69,29 +79,6 @@ Also set the environment variable: `RUST_LOG=debug`
 - Network disconnections don't shut down the system
 - Reconnect functionality has been improved in recent versions
 - Note: Version 1.210.0 has a known issue where it may stop after first reconnect failure
-
-## Exchange Integration
-
-### Q: How do I configure leverage for specific instruments on Binance Futures?
-Currently, individual instrument leverage adjustment must be done through the exchange GUI.
-
-### Q: Can I monitor websocket latency for order confirmations?
-You can measure latency by:
-- Comparing OrderAccepted event's `ts_init` with order submission time
-- Using the strategy's on_order_accepted handler
-- For most purposes, this provides sufficient accuracy (millisecond level)
-
-### Q: Does Nautilus support bracket orders on Binance?
-- Sandbox mode: Bracket orders can be simulated
-- Live mode: Native bracket order support for Binance is not yet implemented
-
-### Q: Is there a BinanceBarDataWrangler available?
-Currently, no specific data wrangler exists for Binance data, but it's being considered for future implementation:
-- Could implement a DataFrame-based wrangler
-- Alternatively, might add a specific loader similar to Databento or Tardis
-
-### Q: If you get error: TRADER-000.Portfolio: Cannot calculate account state: insufficient data for USDT/USD
-This is because you set balance USD rather USDT, just search for USD to locate it and replace.
 
 ## Useful libraries and links
 
