@@ -35,7 +35,7 @@ All examples are in `/docs` folder.
 
 | Docs                |
 |:--------------------|
-| FAQ_from_discord.md |
+| FAQ.md |
 
 ---
 
