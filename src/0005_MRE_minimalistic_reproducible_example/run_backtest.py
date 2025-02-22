@@ -62,6 +62,9 @@ class MinimalStrategy(Strategy):
             self.order_placed = True
             self.log.info(f"Market order placed at {bar.close}")
 
+    def on_stop(self):
+        self.log.info(f"Strategy stopped. | Total bars processed: {self.bars_processed}")
+
 
 if __name__ == "__main__":
     # Engine config
