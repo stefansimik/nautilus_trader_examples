@@ -120,7 +120,7 @@ from nautilus_trader.model.currencies import (
     USDC_POS, USDP, USDT, WSB, XEC, ZEC,
 )
 
-from nautilus_trader.config import (
+from nautilus_trader.model import (
     AccountBalance, AccountId, Bar, BarSpecification, BarType, BookLevel, BookOrder, ClientId,
     ClientOrderId, ComponentId, Currency, CustomData, DataType, ExecAlgorithmId, InstrumentClose,
     InstrumentId, InstrumentStatus, MarginBalance, Money, OrderBook, OrderBookDelta,
