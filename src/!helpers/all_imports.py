@@ -197,6 +197,10 @@ from nautilus_trader.portfolio import Portfolio, PortfolioFacade
 from nautilus_trader.risk.engine import RiskEngine
 from nautilus_trader.risk.sizing import PositionSizer, FixedRiskSizer
 
+from nautilus_trader.test_kit.providers import (
+    TestInstrumentProvider, TestDataProvider, TestDataGenerator
+)
+
 from nautilus_trader.trading import Controller, Strategy, Trader
 
 from nautilus_trader.trading.filters import (
