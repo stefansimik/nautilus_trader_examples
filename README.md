@@ -1,12 +1,12 @@
 # Nautilus Trader Examples
 
-Update 2025-04-29:
+## Archived at 2025-04-29:
 
-All original examples from this repository have been incorporated into the official Nautilus Trader project here:
-https://github.com/nautechsystems/nautilus_trader/tree/develop/examples/backtest
-
-I highly recommend studying and running the new examples from the link above, as they are better documented and even more beginner-friendly.
-All future examples will be contributed to the official Nautilus Trader project, and therefore this repository has been archived.
+> All original examples from this repository have been incorporated into the official [Nautilus Trader](https://github.com/nautechsystems/nautilus_trader) project here:
+> https://github.com/nautechsystems/nautilus_trader/tree/develop/examples/backtest
+>
+> I highly recommend studying and running the new examples from the link above, as they are better documented and even more beginner-friendly.
+> All future examples will be contributed to the official Nautilus Trader project, and therefore this repository has been archived.
 
 ---
 
