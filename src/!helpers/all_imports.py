@@ -201,7 +201,7 @@ from nautilus_trader.test_kit.providers import (
     TestInstrumentProvider, TestDataProvider, TestDataGenerator
 )
 
-from nautilus_trader.trading import Controller, Strategy, Trader
+from nautilus_trader.trading import Controller, Trader
 
 from nautilus_trader.trading.filters import (
     ForexSession, ForexSessionFilter, NewsImpact, NewsEvent, EconomicNewsEventFilter
